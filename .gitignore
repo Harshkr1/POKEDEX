@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.*
+
+# Build / output folders
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Coverage (testing)
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# Parcel / Next / Vite cache
+.cache/
+.next/
+out/
+
+# Misc
+*.pid
+*.seed
+*.pid.lock
