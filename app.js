@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const { indexRouter } = require("./router/indexRouter.js");
+const { cateogryRouter } = require("./router/cateogryRouter.js");
+const { pokemonRouter } = require("./router/pokemonRouter.js");
 
 const PORT = process.env.PORT || 3030;
 
@@ -12,6 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use("/", indexRouter);
+app.use("/cateogry", cateogryRouter);
+app.use("/pokemon", pokemonRouter);
 
 app.listen(PORT, (error) => {
   if (error) {

@@ -1,10 +1,9 @@
 const express = require("express");
+const db = require("../db/query");
 const indexRouter = express.Router();
+const { showIndexPage } = require("../controller/indexController.js");
 
-indexRouter.get("/", (req,res)=>{
-    res.send("POKEDEX IN CONSTRUCTION !!!");
-});
-
+indexRouter.get("/", showIndexPage);
 module.exports = {
   indexRouter,
 };
