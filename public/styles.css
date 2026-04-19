@@ -879,19 +879,29 @@ h3 {
     font-size: 14px;
   }
   .pokemon-detail-container {
-    flex-direction: column; /* 🔥 THIS IS KEY */
-    text-align: center;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    padding: 20px;
+    gap: 20px;
+  }
 
-    align-items: center;
+  .pokemon-image-section,
+  .pokemon-info-section {
+    flex: none;
+    max-width: 100%;
+  }
+
+  .pokemon-info-section {
+    text-align: left;
+  }
+
+  .pokemon-image-section {
     padding: 20px;
   }
+
   .stat {
     grid-template-columns: 70px 1fr;
-  }
-  .pokemon-image-section {
-    width: 100%;
-    display: flex;
-    justify-content: center;
   }
 
   .pokemon-image {
@@ -899,10 +909,6 @@ h3 {
     height: auto;
   }
 
-  .pokemon-info-section {
-    width: 100%;
-    text-align: left;
-  }
   .pokemon-image {
     width: 180px;
     height: 180px;

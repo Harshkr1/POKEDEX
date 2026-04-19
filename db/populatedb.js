@@ -1,4 +1,5 @@
 const { Client } = require("pg");
+require("dotenv").config();
 
 async function fetchPokemonURL() {
   try {
@@ -100,14 +101,20 @@ async function getDescriptionandGenerationandLegendry(filteredData) {
 }
 
 async function insertIntoPokemonTable(filteredPokemonDetail) {
-  const client = new Client({
-    connectionString:
-      "postgresql://harshkr70:Hello12345@@localhost:5432/pokedex",
-  });
+
+  const args = process.argv.slice(2);
+
+  const useLocalDB = args.includes("LOCAL_DATABASE");
+
+  const connectionString = useLocalDB
+    ? process.env.DEVELOPMENT_DATABASE_CONNECTION
+    : process.env.PRODUCTION_DATABASE_CONNECTION;
+
+  const client = new Client({ connectionString });
+
 
   await client.connect();
-  console.log("Connected to DB");
-
+  console.log("Connected to:", useLocalDB ? "LOCAL DB" : "REMOTE DB");
   await client.query(`
     CREATE TABLE IF NOT EXISTS pokemon (
       id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
