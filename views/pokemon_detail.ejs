@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <body>
+      <%- include('./partials/Header') %>
+
+      <div class="pokemon-detail-container">
+        <!-- LEFT: IMAGE -->
+        <div class="pokemon-image-section">
+          <img
+            src="<%= pokemonData.sprite_url %>"
+            alt="<%= pokemonData.name %>"
+            class="pokemon-image"
+          />
+        </div>
+
+        <!-- RIGHT: DETAILS -->
+        <div class="pokemon-info-section">
+          <div class="detail-actions">
+            <a
+              href="/pokemon/delete?name=<%= pokemonData.name %>"
+              class="delete-btn"
+            >
+              Delete
+            </a>
+          </div>
+          <h1 class="pokemon-name"><%= pokemonData.name %></h1>
+
+          <div class="pokemon-type <%= pokemonData.type %>">
+            <%= pokemonData.type %>
+          </div>
+
+          <div class="pokemon-description"><%= pokemonData.description %></div>
+
+          <!-- BASIC INFO -->
+          <div class="pokemon-basic">
+            <p><strong>Pokedex #:</strong> <%= pokemonData.pokedex_number %></p>
+            <p><strong>Height:</strong> <%= pokemonData.height %></p>
+            <p><strong>Weight:</strong> <%= pokemonData.weight %></p>
+            <p><strong>Base Exp:</strong> <%= pokemonData.base_experience %></p>
+            <p><strong>Generation:</strong> <%= pokemonData.generation %></p>
+            <p><strong>Legendary:</strong> <%= pokemonData.is_legendary %></p>
+          </div>
+
+          <!-- STATS -->
+          <div class="stat">
+            <span>HP</span>
+            <div class="bar">
+              <div style="width: <%= (pokemonData.hp / 255) * 100 %>%"></div>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>Attack</span>
+            <div class="bar">
+              <div
+                style="width: <%= (pokemonData.attack / 255) * 100 %>%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>Defense</span>
+            <div class="bar">
+              <div
+                style="width: <%= (pokemonData.defense / 255) * 100 %>%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>Sp. Atk</span>
+            <div class="bar">
+              <div
+                style="width: <%= (pokemonData.special_attack / 255) * 100 %>%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>Sp. Def</span>
+            <div class="bar">
+              <div
+                style="width: <%= (pokemonData.special_defense / 255) * 100 %>%"
+              ></div>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span>Speed</span>
+            <div class="bar">
+              <div style="width: <%= (pokemonData.speed / 255) * 100 %>%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+  </body>
+</html>

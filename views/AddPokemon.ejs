@@ -3,18 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Add Pokemon</title>
   </head>
-  <body>
-    <form action="/pokemon/addPokemon" method="POST">
-      <label for="pokemonName">Enter Pokemon Name: </label>
-      <input
-        type="text"
-        name="pokemonName"
-        id="pokemonName"
-        placeholder="pokemon"
-      />
-      <button type="submit"> Add</button>
-    </form>
-  </body>
+<body>
+  <%- include('./partials/Header') %>
+
+  <div class="add-wrapper">
+    <div class="add-card">
+
+      <h2>Add Pokémon</h2>
+
+      <form action="/pokemon/addPokemon" method="POST" class="add-form">
+        
+        <label for="pokemonName">Enter Pokémon Name</label>
+
+        <div class="input-group">
+          <input
+            type="text"
+            name="pokemonName"
+            id="pokemonName"
+            placeholder="e.g. Pikachu"
+            required
+          />
+
+          <button type="submit">Add</button>
+        </div>
+
+      </form>
+    <!-- RIGHT: ERROR -->
+    <% if (alreadyExist) { %>
+      <div class="error-panel">
+        <%-include('./partials/error')%>
+      </div>
+    <% } %>
+    </div>
+  </div>
+</body>
 </html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Cateogry</title>
+  </head>
+  <body>
+      <%- include('./partials/Header') %>
+<div class="cateogry-card-container">
+
+    <% pokemonData.forEach((cateogry) => {%>
+        <%- include('./partials/Cateogry_Card', {cateogry:cateogry})%>
+    <%});%>
+    </div>
+  </body>
+</html>

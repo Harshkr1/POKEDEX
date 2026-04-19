@@ -145,6 +145,23 @@ async function getAllPokemonOfType(typeName) {
 
   const pokemonIDs = pokemonRows.rows.map((row) => row.pokemon_id);
 
+  const pokemons = await pool.query(
+    "SELECT * from pokemon where id = ANY($1)",
+    [pokemonIDs],
+  );
+
+  return pokemons.rows;
+}
+
+async function getAllPokemonNamesOfType(typeName) {
+  const typeID = await getTypeID(typeName);
+  const pokemonRows = await pool.query(
+    "SELECT DISTINCT pokemon_id from pokemon_types where type_id = $1",
+    [typeID],
+  );
+
+  const pokemonIDs = pokemonRows.rows.map((row) => row.pokemon_id);
+
   const pokemonNames = await pool.query(
     "SELECT name from pokemon where id = ANY($1)",
     [pokemonIDs],
@@ -175,8 +192,8 @@ async function getAllTypeList() {
 }
 
 async function getAllPokemonList() {
-  const res = await pool.query("SELECT name FROM pokemon");
-  return res.rows.map((row) => row.name);
+  const res = await pool.query("SELECT * FROM pokemon");
+  return res.rows;
 }
 
 async function getNumberOfPokemonOfType(typeName) {
@@ -206,8 +223,6 @@ async function getAllTypeAndCount() {
   return NoOfPokemonAndType;
 }
 
-// UpdatePokemon
-async function updatePokemon(pokemonID, updatedDetails) {}
 
 // delete function
 async function deletePokemon(pokemonName) {
@@ -218,7 +233,7 @@ async function deletePokemon(pokemonName) {
 async function deleteType(typeName) {
   const typeID = await getTypeID(typeName);
   console.log("typeName" + typeName + "ID is " + typeID);
-  const pokemonOfType = await getAllPokemonOfType(typeName);
+  const pokemonOfType = await getAllPokemonNamesOfType(typeName);
   for (const pokemon of pokemonOfType) {
     await deletePokemon(pokemon);
   }
@@ -253,10 +268,10 @@ module.exports = {
   getAllTypeList,
   getAllPokemonList,
   getNumberOfPokemonOfType,
-  updatePokemon,
   deletePokemon,
   deleteType,
   getAllTypeAndCount,
   isPokemonPresent,
   insertIntoPokemonTable,
+  getAllPokemonNamesOfType,
 };

@@ -1,0 +1,17 @@
+<div class="card">
+  <img
+    src="<%= pokemon.sprite_url %>"
+    class="card-img-top"
+    alt="<%= pokemon.name %>"
+  />
+
+  <div class="card-body">
+    <h5 class="card-title"><%= pokemon.name %></h5>
+    <p class="card-text"><%= pokemon.description %></p>
+
+    <div class="card-body">
+      <a href="/pokemon?name=<%= pokemon.name %>" class="card-link">View</a>
+      <a href="/pokemon/delete?name=<%= pokemon.name %>" class="card-link">Delete</a>
+    </div>
+  </div>
+</div>

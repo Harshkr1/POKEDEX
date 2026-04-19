@@ -1,0 +1,10 @@
+<div class="cateogry-card <%= cateogry.type %>">
+  <h5 class="cateogry-card-title">
+    <%= cateogry.type %> <%= cateogry.count %>
+  </h5>
+
+  <div class="cateogry-card-actions">
+    <a href="/cateogry?type=<%= cateogry.type %>" class="cateogry-card-link">View</a>
+    <a href="/cateogry/delete?type=<%= cateogry.type %>" class="cateogry-card-link">Delete</a>
+  </div>
+</div>

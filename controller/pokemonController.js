@@ -69,18 +69,21 @@ async function showPokemonpage(request, response) {
   if (!pokemonData) {
     response.status(404).send("Not Found");
   }
-  response.send(pokemonData);
+  !pokemonName
+    ? response.render("pokemon", { pokemonData })
+    : response.render("pokemon_detail", { pokemonData });
 }
 
 async function showPokemonForm(request, response) {
-  response.render("AddPokemon");
+  const alreadyExist = request.query.alreadyExist === "true";
+  response.render("AddPokemon", { alreadyExist });
 }
 
 async function addPokemon(request, response) {
   try {
     const pokemonName = request.body.pokemonName;
     const pokemonDetail = await getPokemonDetail(pokemonName);
-
+    const alreadyExist = false;
     const filteredPokemonDetail = filterPokemonDetail(pokemonDetail);
 
     await getDescriptionandGenerationandLegendry(filteredPokemonDetail);
@@ -88,11 +91,26 @@ async function addPokemon(request, response) {
     const result = await insertIntoPokemonTable(filteredPokemonDetail);
 
     if (result === "Pokemon already present") {
-      return response.status(409).send("Pokemon already exists");
+      return response.redirect("/pokemon/addPokemon?alreadyExist=true")
     }
-    return response.status(200).send("OK");
+    return response.render("pokemon", { pokemonData: await db.getAllPokemonList() });
   } catch (err) {
     console.error("Error adding pokemon:", err);
+    return response.status(500).send("Server Error");
+  }
+}
+
+async function deletePokemon(request, response) {
+  try {
+    const pokemonName = request.query.name;
+    if (!pokemonName) {
+      response.status(304).send("PLEASE SELECT A POKEMON TO DELETE");
+    }
+    await db.deletePokemon(pokemonName);
+
+    response.render("pokemon", { pokemonData: await db.getAllPokemonList() });
+  } catch (err) {
+    console.error("Error deleting pokemon:", err);
     return response.status(500).send("Server Error");
   }
 }
@@ -101,4 +119,5 @@ module.exports = {
   showPokemonpage,
   showPokemonForm,
   addPokemon,
+  deletePokemon,
 };

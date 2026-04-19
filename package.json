@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,9 @@
     "pg": "^8.20.0"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
     "jest": "^30.3.0",
-    "jest-environment-jsdom": "^30.3.0"
+    "jest-environment-jsdom": "^30.3.0",
+    "prettier": "^3.8.3"
   }
 }

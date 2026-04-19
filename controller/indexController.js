@@ -5,7 +5,7 @@ async function showIndexPage(request, response) {
   if (!messages) {
     res.statusCode(404).send("Not Found");
   }
-  response.send(messages);
+  response.render("index");
 }
 
 module.exports = {

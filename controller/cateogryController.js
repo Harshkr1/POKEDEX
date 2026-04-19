@@ -7,11 +7,14 @@ async function showCateogryPage(request, response) {
     pokemonData = await db.getAllTypeAndCount();
   } else {
     pokemonData = await db.getAllPokemonOfType(type);
+    console.log(pokemonData);
   }
   if (!pokemonData) {
-    res.statusCode(404).send("Not Found");
+    response.statusCode(404).send("Not Found");
   }
-  response.send(pokemonData);
+  !type
+    ? response.render("Cateogry", { pokemonData })
+    : response.render("Cateogry_list", { pokemonData: pokemonData, cateogry: type });
 }
 
 async function deleteCateogry(request, response) {
@@ -26,7 +29,9 @@ async function deleteCateogry(request, response) {
     response.status(404).send("Type does not exist");
   }
   await db.deleteType(type);
-  response.send("DELETED CATEOGRY ");
+  const pokemonData = await db.getAllTypeAndCount();
+
+  response.render("Cateogry", { pokemonData })
 }
 
 module.exports = {
