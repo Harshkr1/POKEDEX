@@ -39,7 +39,11 @@ main {
   align-items: center;
   flex-wrap: wrap;
 }
-
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 /* LOGO */
 .logo a {
   font-size: 28px;
@@ -51,10 +55,22 @@ main {
   position: relative;
   transition: 0.3s ease;
 }
+.logo img {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
 
+  /* optional polish */
+  transition: transform 0.3s ease;
+}
 /* subtle glow */
 .logo a:hover {
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+/* HOVER EFFECT */
+.logo:hover img {
+  transform: rotate(20deg) scale(1.1);
 }
 
 /* NAV LIST */
