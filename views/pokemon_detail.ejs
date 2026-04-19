@@ -11,10 +11,11 @@
   </head>
   <body>
     <body>
+        <div class="page-container">
+
       <%- include('./partials/Header') %>
 
       <div class="pokemon-detail-container">
-        <!-- LEFT: IMAGE -->
         <div class="pokemon-image-section">
           <img
             src="<%= pokemonData.sprite_url %>"
@@ -23,7 +24,6 @@
           />
         </div>
 
-        <!-- RIGHT: DETAILS -->
         <div class="pokemon-info-section">
           <div class="detail-actions">
             <a
@@ -103,6 +103,7 @@
           </div>
         </div>
       </div>
+    </div>
     </body>
   </body>
 </html>

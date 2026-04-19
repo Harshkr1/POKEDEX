@@ -8,8 +8,13 @@
     <title><%= cateogry%>></title>
   </head>
   <body>
+    <div class="page-container">
+
       <%- include('./partials/Header') %>
-      <h2 class="category-heading"><%= cateogry %></h2>
+<h2 class="category-heading <%= cateogry %>">
+  <span><%= cateogry %></span>
+  <small>(<%= pokemonData.length %>)</small>
+</h2>
 
     <div class="cateogry-types-container">
 
@@ -17,5 +22,6 @@
         <%- include('./partials/Card', {pokemon:pokemon})%>
     <%});%>
     </div>
+</div>
   </body>
 </html>

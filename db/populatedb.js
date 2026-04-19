@@ -36,19 +36,24 @@ async function fetchPokemonDetail(pokemonURL) {
   }
 }
 
+// Pading Pokedex Number to 4 for fetching better quality images
+function paddingToFourDigits(pokedexNumber) {
+  return pokedexNumber.toString().padStart(4, '0');
+}
+
 function filterPokemonDetail(pokemonDetail) {
   const pokemonTableDetail = [];
 
   pokemonDetail.forEach((pokemon) => {
     const extracted = {
       name: pokemon.name,
-      pokedex_number: pokemon.id,
+      pokedex_number: paddingToFourDigits(pokemon.id),
       description: null,
       type: pokemon.types.map((t) => t.type.name),
       height: pokemon.height,
       weight: pokemon.weight,
       base_experience: pokemon.base_experience,
-      sprite_url: pokemon.sprites.front_default,
+      sprite_url: `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${paddingToFourDigits(pokemon.id)}.png`,
       hp: pokemon.stats.find((s) => s.stat.name === "hp")?.base_stat,
       attack: pokemon.stats.find((s) => s.stat.name === "attack")?.base_stat,
       defense: pokemon.stats.find((s) => s.stat.name === "defense")?.base_stat,

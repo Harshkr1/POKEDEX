@@ -8,12 +8,15 @@
     <title>Cateogry</title>
   </head>
   <body>
+    <div class="page-container">
+
       <%- include('./partials/Header') %>
 <div class="cateogry-card-container">
 
     <% pokemonData.forEach((cateogry) => {%>
         <%- include('./partials/Cateogry_Card', {cateogry:cateogry})%>
     <%});%>
+    </div>
     </div>
   </body>
 </html>
